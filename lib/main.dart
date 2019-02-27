@@ -111,22 +111,22 @@ class RandomWordsState extends State<RandomWords> {
   @override
   Widget build(BuildContext context) {
     final Iterable<ListTile> tiles = _saved.map(
-    (WordPair pair) {
-      return new ListTile(
-        title: new Text(
-          pair.asPascalCase,
-          style: _biggerFont,
-        ),
-        subtitle: new Text("Associate Developer")
-      );
-    },
-  );
-  final List<Widget> divided = ListTile
-    .divideTiles(
-      context: context,
-      tiles: tiles,
-    )
-    .toList();
+      (WordPair pair) {
+        return new ListTile(
+          title: new Text(
+            pair.asPascalCase,
+            style: _biggerFont,
+          ),
+          subtitle: new Text("Associate Developer")
+        );
+      },
+    );
+    final List<Widget> divided = ListTile
+      .divideTiles(
+        context: context,
+        tiles: tiles,
+      )
+      .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -176,42 +176,5 @@ class RandomWordsState extends State<RandomWords> {
         });
       }, 
     );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(  
-      builder: (BuildContext context) {
-        final Iterable<ListTile> tiles = _saved.map(
-          (WordPair pair) {
-            return new ListTile(
-              title: new Text(
-                pair.asPascalCase,
-                style: _biggerFont,
-              ),
-              subtitle: new Text("Associate Developer")
-            );
-          },
-        );
-        final List<Widget> divided = ListTile
-          .divideTiles(
-            context: context,
-            tiles: tiles,
-          )
-          .toList();
-        return new Scaffold(         // Add 6 lines from here...
-          appBar: new AppBar(
-            title: const Text('Saved Suggestions'),
-          ),
-          drawer: new Drawer(
-            child: ListView(
-              children: divided
-              )
-          ),
-          body: new Text('hi')
-        );  
-      },
-    ),                 
-     );
   }
 }
