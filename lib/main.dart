@@ -110,14 +110,34 @@ class RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
+    final Iterable<ListTile> tiles = _saved.map(
+    (WordPair pair) {
+      return new ListTile(
+        title: new Text(
+          pair.asPascalCase,
+          style: _biggerFont,
+        ),
+        subtitle: new Text("Associate Developer")
+      );
+    },
+  );
+  final List<Widget> divided = ListTile
+    .divideTiles(
+      context: context,
+      tiles: tiles,
+    )
+    .toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Yoma IT staff'),
-        actions: <Widget>[  
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
-        ],
       ),
       body: _buildSuggestions(),
+      drawer: new Drawer(
+        child: ListView(
+          children: divided
+          )
+      ),
     );
   }
 
@@ -183,7 +203,12 @@ class RandomWordsState extends State<RandomWords> {
           appBar: new AppBar(
             title: const Text('Saved Suggestions'),
           ),
-          body: new ListView(children: divided),
+          drawer: new Drawer(
+            child: ListView(
+              children: divided
+              )
+          ),
+          body: new Text('hi')
         );  
       },
     ),                 
